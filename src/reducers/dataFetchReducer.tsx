@@ -1,35 +1,34 @@
-export enum FetchState {
-  Error,
-  Loading,
-  Success,
-  Pending,
+import Movie from '../models/Movie';
+import SearchResult from '../models/SearchResult';
+import { Reducer } from 'react';
+import State from '../models/State';
+import Action from '../models/Action';
+import { FetchState } from '../models/FetchState';
+
+export enum MoviesActionType {
+  FetchMovies = 'Fetch Movies',
+  FetchMoviesSuccess = 'Fetch Movies Success',
+  FetchMoviesFailure = 'Fetch Movies Failure',
 }
 
-type State = {
-  state: FetchState;
-  data: any;
-};
-
-type Action = {
-  payload?: any;
-  type: 'FETCH_INIT' | 'FETCH_SUCCESS' | 'FETCH_FAILURE';
-};
-
-const dataFetchReducer = (state: State, action: Action) => {
+const moviesReducer: Reducer<
+  State<Movie[]>,
+  Action<SearchResult, MoviesActionType>
+> = (state, action) => {
   switch (action.type) {
-    case 'FETCH_INIT':
+    case MoviesActionType.FetchMovies:
       return { ...state, state: FetchState.Loading };
-    case 'FETCH_SUCCESS':
+    case MoviesActionType.FetchMoviesSuccess:
       return {
         ...state,
         state: FetchState.Success,
-        data: action.payload,
+        data: action.payload ? action.payload.Search : [],
       };
-    case 'FETCH_FAILURE':
+    case MoviesActionType.FetchMoviesFailure:
       return { ...state, state: FetchState.Error };
     default:
       throw new Error();
   }
 };
 
-export default dataFetchReducer;
+export default moviesReducer;

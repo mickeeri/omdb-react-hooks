@@ -1,45 +1,53 @@
-import React, { useState, useReducer, useEffect } from 'react';
-import dataFetchReducer, { FetchState } from '../reducers/dataFetchReducer';
+import { useState, useReducer, useEffect } from 'react';
+import moviesReducer, { MoviesActionType } from '../reducers/dataFetchReducer';
 import axios from 'axios';
+import { FetchState } from '../models/FetchState';
+import { getOMDBUrl } from '../utils';
 
-function useDataApi(initialUrl: string, initialData: any) {
-  const [url, setUrl] = useState(initialUrl);
-  const [state, dispatch] = useReducer(dataFetchReducer, {
+function useOmdbApi() {
+  const [url, setUrl] = useState('');
+  const [state, dispatch] = useReducer(moviesReducer, {
     state: FetchState.Pending,
-    data: initialData,
+    data: [],
   });
 
   useEffect(() => {
     let didCancel = false;
 
     const fetchData = async () => {
-      dispatch({ type: 'FETCH_INIT' });
+      dispatch({ type: MoviesActionType.FetchMovies });
 
       try {
+        // TODO: use fetch instead
         const result = await axios(url);
 
         if (!didCancel) {
-          dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
+          dispatch({
+            type: MoviesActionType.FetchMoviesSuccess,
+            payload: result.data,
+          });
         }
       } catch (error) {
         if (!didCancel) {
-          dispatch({ type: 'FETCH_FAILURE' });
+          dispatch({ type: MoviesActionType.FetchMoviesFailure });
         }
       }
     };
 
-    fetchData();
+    if (url) {
+      fetchData();
+    }
 
     return () => {
       didCancel = true;
     };
   }, [url]);
 
-  function doFetch(url: string) {
-    setUrl(url);
+  function doFetch(query: string) {
+    setUrl(getOMDBUrl(query));
   }
 
   return { ...state, doFetch };
 }
 
-export default useDataApi;
+export default useOmdbApi;
