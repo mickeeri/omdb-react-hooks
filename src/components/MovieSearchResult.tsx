@@ -1,15 +1,19 @@
 import React, { FC } from 'react';
 import Movie from '../models/Movie';
+import MovieItem from './MovieItem';
+import { ResultList } from '../styles';
 
 const MovieSearchResult: FC<{ movies: Movie[] }> = ({ movies = [] }) => {
   return (
-    <div>
+    <ResultList>
       {movies.length ? (
-        movies.map(movie => <div key={movie.imdbID}>{movie.Title}</div>)
+        movies
+          .filter(({ Poster }) => Poster !== 'N/A')
+          .map(movie => <MovieItem key={movie.imdbID} movie={movie} />)
       ) : (
         <div>Found no results</div>
       )}
-    </div>
+    </ResultList>
   );
 };
 

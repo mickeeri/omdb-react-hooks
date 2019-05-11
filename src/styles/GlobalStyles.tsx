@@ -9,6 +9,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #ffffff;
+  background-color: #13181C;
+}
+
+
+div {
+  box-sizing: border-box;
 }
 `;
 

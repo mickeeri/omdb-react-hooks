@@ -18,7 +18,6 @@ function useOmdbApi() {
       dispatch({ type: MoviesActionType.FetchMovies });
 
       try {
-        // TODO: use fetch instead
         const result = await axios(url);
 
         if (!didCancel) {
