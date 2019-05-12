@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-const borderColor = '#efd2d2';
-
 export const Header = styled.h1`
   font-size: 30px;
   margin: 40px 0;
@@ -51,43 +49,25 @@ export const SearchButton = styled.button`
   }
 `;
 
-export const MovieCard = styled.div`
-  border: 1px solid #eee;
-  /* margin: 10px 0; */
-  background: white;
-  color: black;
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-
-  /* width: 240px; */
-  height: 380px;
-
-  .poster-container {
-    width: 100%;
-    height: 100%;
-
-    .poster-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100%;
-
-      .poster {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        border: 0;
-        bottom: 0;
-        background: 50% 50% / cover no-repeat;
-        width: 100%;
-        height: auto;
-      }
-    }
-  }
-`;
-
 export const ResultList = styled.div`
   margin: 30px 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 15px;
+  align-items: stretch;
+  justify-items: center;
+`;
+
+export const MovieCard = styled.div`
+  border: 1px solid #eee;
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 `;

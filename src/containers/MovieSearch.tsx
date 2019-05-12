@@ -20,13 +20,16 @@ function MovieSearch() {
       >
         <Flex>
           <Input
+            aria-label="search"
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Find movies from the Open Movie Database"
           />
 
-          <SearchButton type="submit">Search</SearchButton>
+          <SearchButton disabled={state === FetchState.Loading} type="submit">
+            Search
+          </SearchButton>
         </Flex>
       </form>
       {state === FetchState.Success && <MovieSearchResult movies={data} />}

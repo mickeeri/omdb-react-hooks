@@ -1,8 +1,8 @@
 import { useState, useReducer, useEffect } from 'react';
 import moviesReducer, { MoviesActionType } from '../reducers/dataFetchReducer';
-import axios from 'axios';
 import { FetchState } from '../models/FetchState';
 import { getOMDBUrl } from '../utils';
+import axios from 'axios';
 
 function useOmdbApi() {
   const [url, setUrl] = useState('');
@@ -18,7 +18,7 @@ function useOmdbApi() {
       dispatch({ type: MoviesActionType.FetchMovies });
 
       try {
-        const result = await axios(url);
+        const result = await axios.get(url);
 
         if (!didCancel) {
           dispatch({
@@ -35,6 +35,10 @@ function useOmdbApi() {
 
     if (url) {
       fetchData();
+    } else {
+      // for testing
+      // setUrl(getOMDBUrl('godfather'));
+      // fetchData();
     }
 
     return () => {

@@ -2,19 +2,10 @@ import React, { FC } from 'react';
 import Movie from '../models/Movie';
 import { MovieCard } from '../styles';
 
-const MovieItem: FC<{ movie: Movie }> = ({
-  movie: { Title, Poster, Year },
-}) => {
+const MovieItem: FC<{ movie: Movie }> = ({ movie: { Title, Poster } }) => {
   return (
-    <MovieCard>
-      <div className="poster-container">
-        <div className="poster-wrapper">
-          <div
-            className="poster"
-            style={{ backgroundImage: `url(${Poster})` }}
-          />
-        </div>
-      </div>
+    <MovieCard data-testid="movie-card">
+      <img src={Poster} alt={`${Title}`} />
     </MovieCard>
   );
 };
