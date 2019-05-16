@@ -22,7 +22,7 @@ beforeEach(() => {
         Title: 'The Godfather',
         Poster: '',
         Type: 'movie',
-        Year: '1997',
+        Year: '1972',
         imdbID: '98jaja82',
       },
     ],
@@ -41,6 +41,7 @@ test('loads and displays movies', async () => {
   const { container, getByLabelText, getByText, getByAltText } = render(
     <MovieSearch />,
   );
+
   const searchInput = getByLabelText('search') as HTMLInputElement;
   const searchButton = getByText('Search');
 
