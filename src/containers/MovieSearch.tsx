@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import useOmdbApi from '../hooks/useDataApi';
+import useOmdbApi from '../hooks/useOmdbApi';
 import MovieSearchResult from '../components/MovieSearchResult';
 import { FetchState } from '../models/FetchState';
 import { Input, Flex, SearchButton, Header } from '../styles';

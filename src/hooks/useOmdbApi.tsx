@@ -1,5 +1,5 @@
 import { useState, useReducer, useEffect } from 'react';
-import moviesReducer, { MoviesActionType } from '../reducers/dataFetchReducer';
+import moviesReducer, { MoviesActionType } from '../reducers/moviesReducer';
 import { FetchState } from '../models/FetchState';
 import { getOMDBUrl } from '../utils';
 import axios from 'axios';
